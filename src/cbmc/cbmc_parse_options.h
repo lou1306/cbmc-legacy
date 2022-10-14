@@ -20,7 +20,8 @@ class bmct;
 class goto_functionst;
 class optionst;
 
-#define CBMC_OPTIONS \
+  //// OMAR: added options "(show-steps)(show-model)(assume)(init):"
+  #define CBMC_OPTIONS \
   "(program-only)(function):(preprocess)(slice-by-trace):" \
   "(no-simplify)(unwind):(unwindset):(slice-formula)(full-slice)" \
   "(debug-level):(no-propagation)(no-simplify-if)" \
@@ -53,6 +54,7 @@ class optionst;
   "(string-abstraction)(no-arch)(arch):" \
   "(round-to-nearest)(round-to-plus-inf)(round-to-minus-inf)(round-to-zero)" \
   "(graphml-cex):(json-cex):" \
+  "(show-steps)(show-model)(assume):(init):" \
   "(decide)" // legacy, and will eventually disappear
 
 class cbmc_parse_optionst:

@@ -197,6 +197,22 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
   if(cmdline.isset("unwindset"))
     options.set_option("unwindset", cmdline.get_value("unwindset"));
 
+  if(cmdline.isset("assume")) // OMAR
+    options.set_option("assume", cmdline.get_value("assume")); // OMAR
+
+  if(cmdline.isset("init")) // OMAR
+    options.set_option("assume-weak", cmdline.get_value("init")); // OMAR
+
+  if(cmdline.isset("show-model"))  // OMAR
+    options.set_option("show-model", true);
+  else
+    options.set_option("show-model", false);
+
+  if(cmdline.isset("show-steps"))  // OMAR
+    options.set_option("show-steps", true);
+  else
+    options.set_option("show-steps", false);
+
   // constant propagation
   if(cmdline.isset("no-propagation"))
     options.set_option("propagation", false);
@@ -1129,5 +1145,11 @@ void cbmc_parse_optionst::help()
     " --version                    show version and exit\n"
     " --xml-ui                     use XML-formatted output\n"
     " --xml-interface              bi-directional XML interface\n"
+    "\n"
+    "MiniSat options:\n"  // OMAR
+    " --assume v=b,...             solve under assumptions (with frozen propositional variables)\n" // OMAR
+    " --init v=b,...             initial choices for propositional variables (no frozen variables)\n" // OMAR
+    " --show-model                 show satisfying assignment to propositional variables (if any)\n" // OMAR
+    " --show-steps                 show the main steps performed by the solver (choices, backtracking depth, etc.) \n" // OMAR
     "\n";
 }

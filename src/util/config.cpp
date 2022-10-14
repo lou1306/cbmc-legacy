@@ -1135,13 +1135,6 @@ bool configt::set(const cmdlinet &cmdline)
     #ifndef _WIN32
     // On Windows, long double width varies by compiler
 
-    // Apparently, LLVM on Apple Silicon will say that sizeof(long double) is 8,
-    // even though long doubles are really 16 bytes long.
-
-    long double a[1];
-    size_t size_of_ld = (char*)(a+1) - (char*)(a);
-
-    std::cout << +ansi_c.long_double_width <<  " " << sizeof(long double)*8 << " " << size_of_ld << "\n" ;
     assert(ansi_c.long_double_width==sizeof(long double)*8);
     #endif
   }  

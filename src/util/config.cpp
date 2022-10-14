@@ -6,6 +6,8 @@ Author: Daniel Kroening, kroening@kroening.com
 
 \*******************************************************************/
 
+#include <iostream>
+
 #include <cstdlib>
 
 #include "namespace.h"
@@ -414,7 +416,10 @@ void configt::ansi_ct::set_arch_spec_arm(const irep_idt &subarch)
   if(subarch=="arm64")
   {
     set_LP64();
-    long_double_width=16*8;
+    //LUCA 20221014
+    // Hacky hack because Apple Silicon is arm64 but has 64-bit long doubles
+    long_double_width=__SIZEOF_LONG_DOUBLE__*8;
+    //long_double_width=16*8;
   }
   else
   {
@@ -1129,6 +1134,14 @@ bool configt::set(const cmdlinet &cmdline)
 
     #ifndef _WIN32
     // On Windows, long double width varies by compiler
+
+    // Apparently, LLVM on Apple Silicon will say that sizeof(long double) is 8,
+    // even though long doubles are really 16 bytes long.
+
+    long double a[1];
+    size_t size_of_ld = (char*)(a+1) - (char*)(a);
+
+    std::cout << +ansi_c.long_double_width <<  " " << sizeof(long double)*8 << " " << size_of_ld << "\n" ;
     assert(ansi_c.long_double_width==sizeof(long double)*8);
     #endif
   }  

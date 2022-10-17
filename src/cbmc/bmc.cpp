@@ -182,6 +182,13 @@ bmct::run_decision_procedure(prop_convt &prop_conv)
 
   status() << "Running " << prop_conv.decision_procedure_text() << eom;
 
+  std::string choices, weakchoices; bool model;
+  choices = options.get_option("assume");
+  weakchoices = options.get_option("assume-weak");
+  model = options.get_bool_option("show-model");
+  prop_conv.setup(choices, weakchoices, model);
+
+  
   decision_proceduret::resultt dec_result=prop_conv.dec_solve();
   // output runtime
 

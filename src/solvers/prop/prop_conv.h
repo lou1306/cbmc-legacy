@@ -55,6 +55,14 @@ public:
   // returns true if an assumption is in the final conflict
   virtual bool is_in_conflict(literalt l) const;  
   virtual bool has_is_in_conflict() const { return false; }
+
+  //LUCA 20221014
+  virtual void setup(std::string s, std::string t, bool model);
+
+protected:
+  char* strongAssumesCli;
+  char* weakAssumesCli;
+  bool model;
 };
 
 //

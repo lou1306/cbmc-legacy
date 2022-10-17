@@ -67,6 +67,7 @@ public:
   
   // assumptions
   virtual void set_assumptions(const bvt &_assumptions) { }
+  virtual void set_weak_assumptions(const bvt &_assumptions) { }
   virtual bool has_set_assumptions() const { return false; }
 
   // variables

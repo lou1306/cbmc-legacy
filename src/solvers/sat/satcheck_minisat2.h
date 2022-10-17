@@ -37,6 +37,7 @@ public:
 
   // extra MiniSat feature: solve with assumptions
   virtual void set_assumptions(const bvt &_assumptions);
+  virtual void set_weak_assumptions(const bvt &_assumptions);
   
   // extra MiniSat feature: default branching decision
   void set_polarity(literalt a, bool value);
@@ -50,6 +51,7 @@ protected:
   
   void add_variables();
   bvt assumptions;
+  bvt weak_assumptions;
 };
 
 class satcheck_minisat_no_simplifiert:

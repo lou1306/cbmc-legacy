@@ -18,6 +18,9 @@ Author: Daniel Kroening, kroening@kroening.com
 #include "prop_conv.h"
 #include "literal_expr.h"
 
+//LUCA
+#include "minisat/utils/ParseUtils.h"
+
 //#define DEBUG
 
 /*******************************************************************\
@@ -631,6 +634,21 @@ void prop_conv_solvert::post_process()
 {
 }
 
+void prop_convt::setup(std::string s, std::string t, bool model)
+{
+  strongAssumesCli  = new char[s.size() + 1];
+  std::copy(s.begin(), s.end(), strongAssumesCli);
+  strongAssumesCli[s.size()] = '\0';
+
+
+  weakAssumesCli  = new char[t.size() + 1];
+  std::copy(t.begin(), t.end(), weakAssumesCli);
+  weakAssumesCli[t.size()] = '\0';
+
+  this->model = model;
+}
+
+
 /*******************************************************************\
 
 Function: prop_conv_solvert::solve
@@ -654,6 +672,32 @@ decision_proceduret::resultt prop_conv_solvert::dec_solve()
   }
 
   print(7, "Solving with "+prop.solver_text());
+
+
+  
+
+  // LUCA 20221014
+  // This must be the place, X marks the spot, and so on
+  bvt strongAssumes, weakAssumes;
+  int dimacsLiteral;
+  literalt l;
+
+  while (!Minisat::isEof(strongAssumesCli)) {
+    dimacsLiteral = Minisat::parseInt(strongAssumesCli);
+    l.from_dimacs(dimacsLiteral);
+    strongAssumes.push_back(l);
+  }
+
+  while (!Minisat::isEof(weakAssumesCli)) {
+    dimacsLiteral = Minisat::parseInt(weakAssumesCli);
+    l.from_dimacs(dimacsLiteral);
+    weakAssumes.push_back(l);
+  }
+
+  prop.set_assumptions(strongAssumes);
+  prop.set_weak_assumptions(weakAssumes);
+
+
 
   propt::resultt result=prop.prop_solve();
 

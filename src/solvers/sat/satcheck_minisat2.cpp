@@ -244,7 +244,12 @@ propt::resultt satcheck_minisat2_baset<T>::prop_solve()
       {
         Minisat::vec<Minisat::Lit> solver_assumptions;
         convert(assumptions, solver_assumptions);
-        
+
+        //LUCA 20221017
+        forall_literals(it, weak_assumptions)
+          solver->setPolarity(it->var_no(), Minisat::lbool(it->sign()));
+
+
         if(solver->solve(solver_assumptions))
         {
           messaget::status() << 
@@ -389,6 +394,21 @@ void satcheck_minisat2_baset<T>::set_assumptions(const bvt &bv)
       break;
     }
 }
+
+
+template<typename T>
+void satcheck_minisat2_baset<T>::set_weak_assumptions(const bvt &bv)
+{
+  weak_assumptions=bv;
+  
+  forall_literals(it, weak_assumptions)
+    if(it->is_true())
+    {
+      weak_assumptions.clear();
+      break;
+    }
+}
+
 
 /*******************************************************************\
 

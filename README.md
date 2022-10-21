@@ -19,6 +19,7 @@ cd cbmc-legacy
 git submodule init
 git submotule update
 # Build CBMC-Legacy
+cd src
 make
 ```
 

@@ -138,6 +138,12 @@ unsigned int optionst::get_unsigned_int_option(const std::string &option) const
   return value.empty()?0:safe_string2unsigned(value);
 }
 
+double optionst::get_double_option(const std::string &option) const
+{
+  const std::string value=get_option(option);
+  return value.empty()?0.0:std::stod(value);
+}
+
 /*******************************************************************\
 
 Function: optionst::get_option

@@ -13,9 +13,12 @@ guide the analysis by means of strong and weak assumptions, etc.
 This should do the trick:
 
 ```bash
-git clone git@github.com:lou1306/cbmc-legacy.git
+git clone https://github.com/lou1306/cbmc-legacy.git
 cd cbmc-legacy
-git submodule init # Downloads PlanckSat
+# Download PlanckSat
+git submodule init
+git submotule update
+# Build CBMC-Legacy
 make
 ```
 

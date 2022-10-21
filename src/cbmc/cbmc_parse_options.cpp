@@ -203,6 +203,12 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
   if(cmdline.isset("init")) // OMAR
     options.set_option("assume-weak", cmdline.get_value("init")); // OMAR
 
+  if(cmdline.isset("rnd-seed")) // LUCA
+    options.set_option("rnd-seed", cmdline.get_value("rnd-seed")); // LUCA
+
+  if(cmdline.isset("rnd-freq")) // LUCA
+    options.set_option("rnd-freq", cmdline.get_value("rnd-freq")); // LUCA
+
   if(cmdline.isset("show-model"))  // OMAR
     options.set_option("show-model", true);
   else
@@ -1147,9 +1153,11 @@ void cbmc_parse_optionst::help()
     " --xml-interface              bi-directional XML interface\n"
     "\n"
     "MiniSat options:\n"  // OMAR
-    " --assume v=b,...             solve under assumptions (with frozen propositional variables)\n" // OMAR
-    " --init v=b,...             initial choices for propositional variables (no frozen variables)\n" // OMAR
+    " --assume \"l1 l2...\"          solve under assumptions (use DIMACS format, e.g, \"1 -2\")\n" // OMAR
+    " --init \"l1 l2...\"            initial choices for propositional variables (may be dropped. Use DIMACS format)\n" // OMAR
     " --show-model                 show satisfying assignment to propositional variables (if any)\n" // OMAR
     " --show-steps                 show the main steps performed by the solver (choices, backtracking depth, etc.) \n" // OMAR
+    " --rnd-seed                   seed for the random number generator \n" // LUCA
+    " --rnd-freq                   how frequently MiniSat should make a random decision \n" // LUCA
     "\n";
 }

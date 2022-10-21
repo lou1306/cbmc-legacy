@@ -21,6 +21,7 @@ class goto_functionst;
 class optionst;
 
   //// OMAR: added options "(show-steps)(show-model)(assume)(init):"
+  //// LUCA: added "(rnd-seed)(rnd-freq)"
   #define CBMC_OPTIONS \
   "(program-only)(function):(preprocess)(slice-by-trace):" \
   "(no-simplify)(unwind):(unwindset):(slice-formula)(full-slice)" \
@@ -55,6 +56,7 @@ class optionst;
   "(round-to-nearest)(round-to-plus-inf)(round-to-minus-inf)(round-to-zero)" \
   "(graphml-cex):(json-cex):" \
   "(show-steps)(show-model)(assume):(init):" \
+  "(rnd-seed):(rnd-freq):" \
   "(decide)" // legacy, and will eventually disappear
 
 class cbmc_parse_optionst:

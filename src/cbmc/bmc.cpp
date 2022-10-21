@@ -186,7 +186,12 @@ bmct::run_decision_procedure(prop_convt &prop_conv)
   choices = options.get_option("assume");
   weakchoices = options.get_option("assume-weak");
   model = options.get_bool_option("show-model");
-  prop_conv.setup(choices, weakchoices, model);
+  
+  prop_conv.setup(
+    choices, weakchoices, model,
+    options.get_unsigned_int_option("rnd-seed"),
+    options.get_double_option("rnd-freq")
+  );
 
   
   decision_proceduret::resultt dec_result=prop_conv.dec_solve();

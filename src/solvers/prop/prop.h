@@ -79,7 +79,9 @@ public:
   // solving
   virtual const std::string solver_text()=0;
   typedef enum { P_SATISFIABLE, P_UNSATISFIABLE, P_ERROR } resultt;
-  virtual resultt prop_solve()=0;  
+  virtual resultt prop_solve()=0;
+  virtual void set_random_seed(float seed) { }
+  virtual void set_random_freq(float freq) { }
   
   // satisfying assignment, from prop_assignmentt
   virtual tvt l_get(literalt a) const=0;

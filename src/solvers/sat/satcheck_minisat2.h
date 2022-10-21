@@ -38,6 +38,8 @@ public:
   // extra MiniSat feature: solve with assumptions
   virtual void set_assumptions(const bvt &_assumptions);
   virtual void set_weak_assumptions(const bvt &_assumptions);
+  virtual void set_random_seed(float seed);
+  virtual void set_random_freq(float freq);
   
   // extra MiniSat feature: default branching decision
   void set_polarity(literalt a, bool value);

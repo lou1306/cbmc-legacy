@@ -634,7 +634,12 @@ void prop_conv_solvert::post_process()
 {
 }
 
-void prop_convt::setup(std::string s, std::string t, bool model)
+void prop_convt::setup(
+  std::string s,
+  std::string t,
+  bool model,
+  unsigned int seed,
+  double freq)
 {
   strongAssumesCli  = new char[s.size() + 1];
   std::copy(s.begin(), s.end(), strongAssumesCli);
@@ -646,6 +651,8 @@ void prop_convt::setup(std::string s, std::string t, bool model)
   weakAssumesCli[t.size()] = '\0';
 
   this->model = model;
+  this->seed = seed;
+  this->freq = freq;
 }
 
 
@@ -696,7 +703,8 @@ decision_proceduret::resultt prop_conv_solvert::dec_solve()
 
   prop.set_assumptions(strongAssumes);
   prop.set_weak_assumptions(weakAssumes);
-
+  prop.set_random_seed((float)this->seed);
+  prop.set_random_freq((float)this->freq);
 
 
   propt::resultt result=prop.prop_solve();

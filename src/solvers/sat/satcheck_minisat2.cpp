@@ -409,6 +409,24 @@ void satcheck_minisat2_baset<T>::set_weak_assumptions(const bvt &bv)
     }
 }
 
+template<typename T>
+void satcheck_minisat2_baset<T>::set_random_seed(float seed) {
+  solver->random_seed = seed;
+
+  messaget::status() << "Seed: " << solver->random_seed << '\n';
+}
+
+template<typename T>
+void satcheck_minisat2_baset<T>::set_random_freq(float freq) {
+  solver->random_var_freq = freq;
+  if (freq > 0) {
+    solver->rnd_pol = true;
+  }
+
+  messaget::status() << "Frequency of random choice: " << solver->random_var_freq << '\n';
+  
+}
+
 
 /*******************************************************************\
 

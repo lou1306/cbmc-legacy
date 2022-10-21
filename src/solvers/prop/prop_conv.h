@@ -57,12 +57,14 @@ public:
   virtual bool has_is_in_conflict() const { return false; }
 
   //LUCA 20221014
-  virtual void setup(std::string s, std::string t, bool model);
+  virtual void setup(std::string s, std::string t, bool model, unsigned int seed, double freq);
 
 protected:
   char* strongAssumesCli;
   char* weakAssumesCli;
   bool model;
+  unsigned int seed;
+  double freq;
 };
 
 //

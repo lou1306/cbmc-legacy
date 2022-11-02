@@ -651,7 +651,8 @@ void prop_convt::setup(
   weakAssumesCli[t.size()] = '\0';
 
   this->model = model;
-  this->seed = seed;
+  // We force seed to be different from 0 (cfr drand() comments in Minisat source)
+  this->seed = seed ? seed : 1;
   this->freq = freq;
 }
 
